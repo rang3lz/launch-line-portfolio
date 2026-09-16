@@ -1,0 +1,583 @@
+<title>Launch Line</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Michroma&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    color-scheme: dark;
+    --bg: #0b0b0d;
+    --bg-soft: #100f11;
+    --surface: #151417;
+    --line: #29282d;
+    --line-soft: rgba(255,255,255,0.08);
+    --text: #eeeeec;
+    --text-dim: #9a989e;
+    --text-faint: #67656b;
+    --chrome-1: #f6f6f4;
+    --chrome-2: #a4a3ab;
+    --chrome-3: #55545c;
+    --font-display: 'Michroma', 'Arial Narrow', sans-serif;
+    --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+
+  *{ box-sizing: border-box; }
+  body{
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    padding-left: max(20px, env(safe-area-inset-left, 0px));
+    padding-right: max(20px, env(safe-area-inset-right, 0px));
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  img{ max-width: 100%; display: block; }
+  a{ color: inherit; }
+  h1,h2,h3{ text-wrap: balance; margin: 0; }
+  p{ margin: 0; }
+  ::selection{ background: var(--chrome-2); color: #0b0b0d; }
+
+  .wrap{
+    max-width: 1080px;
+    margin-inline: auto;
+    width: 100%;
+  }
+  .full-bleed{
+    margin-inline: calc(-1 * max(20px, env(safe-area-inset-left, 0px))) calc(-1 * max(20px, env(safe-area-inset-right, 0px)));
+  }
+
+  .eyebrow{
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .eyebrow::before{
+    content: "";
+    width: 22px;
+    height: 1px;
+    background: var(--chrome-2);
+    display: inline-block;
+  }
+
+  .chrome-text{
+    background: linear-gradient(115deg, var(--chrome-3) 0%, var(--chrome-1) 35%, var(--chrome-2) 55%, var(--chrome-1) 75%, var(--chrome-3) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* ---------- Header ---------- */
+  header{
+    position: sticky;
+    top: env(safe-area-inset-top, 0px);
+    z-index: 20;
+    background: rgba(11,11,13,0.82);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .nav{
+    max-width: 1080px;
+    margin-inline: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-block: 16px;
+    gap: 16px;
+  }
+  .brand{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    letter-spacing: 0.08em;
+  }
+  .brand img{ flex-shrink: 0; width: 28px; height: 28px; object-fit: contain; }
+  .nav-links{
+    display: flex;
+    gap: 28px;
+    font-size: 0.85rem;
+    color: var(--text-dim);
+  }
+  .nav-links a{ text-decoration: none; transition: color .2s ease; }
+  .nav-links a:hover, .nav-links a:focus-visible{ color: var(--text); }
+  .btn{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 22px;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+  }
+  .btn-primary{
+    background: linear-gradient(120deg, var(--chrome-1), var(--chrome-2));
+    color: #0b0b0d;
+  }
+  .btn-primary:hover, .btn-primary:focus-visible{
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px rgba(255,255,255,0.12);
+  }
+  .btn-ghost{
+    border: 1px solid var(--line);
+    color: var(--text);
+  }
+  .btn-ghost:hover, .btn-ghost:focus-visible{ border-color: var(--chrome-2); }
+  :focus-visible{ outline: 2px solid var(--chrome-2); outline-offset: 2px; }
+
+  @media (max-width: 720px){
+    .nav-links{ display: none; }
+  }
+
+  /* ---------- Hero ---------- */
+  .hero-frame{
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-frame video{
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* ---------- Sections ---------- */
+  section{
+    padding-block: clamp(56px, 9vw, 96px);
+  }
+  .section-head{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: clamp(32px, 5vw, 56px);
+    max-width: 640px;
+  }
+  .section-head h2{
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 3.4vw, 2.3rem);
+    line-height: 1.25;
+  }
+
+  /* divider */
+  .divider{
+    display: block;
+    width: 100%;
+    height: 64px;
+    overflow: visible;
+  }
+
+  /* ---------- About ---------- */
+  .about{
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: clamp(28px, 5vw, 64px);
+    align-items: start;
+  }
+  .about-photo{
+    position: relative;
+    border: 1px solid var(--line);
+    padding: 10px;
+  }
+  .about-photo img{
+    width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    filter: grayscale(0.15) contrast(1.03);
+  }
+  .about-photo .tag{
+    position: absolute;
+    bottom: -1px;
+    left: -1px;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    padding: 6px 12px;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+  .about-body{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .about-body h1{
+    font-family: var(--font-display);
+    font-size: clamp(1.7rem, 4vw, 2.6rem);
+    line-height: 1.2;
+  }
+  .role{
+    color: var(--text-dim);
+    font-size: 0.95rem;
+  }
+  .about-body p{
+    color: var(--text-dim);
+    max-width: 60ch;
+  }
+  .focus-tags{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 4px;
+  }
+  .focus-tags span{
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 7px 16px;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+
+  @media (max-width: 680px){
+    .about{ grid-template-columns: 1fr; }
+    .about-photo{ max-width: 260px; }
+  }
+
+  /* ---------- Services ---------- */
+  .services-grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+  .service{
+    background: var(--bg);
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    transition: background .25s ease;
+  }
+  .service:hover{ background: var(--bg-soft); }
+  .service .num{
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    color: var(--text-faint);
+  }
+  .service h3{
+    font-size: 1rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .service p{
+    color: var(--text-dim);
+    font-size: 0.9rem;
+  }
+  @media (max-width: 780px){
+    .services-grid{ grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 480px){
+    .services-grid{ grid-template-columns: 1fr; }
+  }
+
+  /* ---------- Process ---------- */
+  .process{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+  .step{
+    border-top: 1px solid var(--line);
+    padding-top: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .step .num{
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+  }
+  .step h3{
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .step p{
+    color: var(--text-dim);
+    font-size: 0.88rem;
+  }
+  @media (max-width: 780px){
+    .process{ grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 480px){
+    .process{ grid-template-columns: 1fr; }
+  }
+
+  /* ---------- CTA ---------- */
+  .cta{
+    position: relative;
+    border: 1px solid var(--line);
+    padding: clamp(40px, 7vw, 72px);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    background:
+      radial-gradient(60% 120% at 15% 0%, rgba(255,255,255,0.06), transparent 60%),
+      radial-gradient(60% 120% at 85% 100%, rgba(255,255,255,0.05), transparent 60%);
+  }
+  .cta h2{
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 4vw, 2.4rem);
+    max-width: 18ch;
+  }
+  .cta p{
+    color: var(--text-dim);
+    max-width: 46ch;
+  }
+
+  /* ---------- Footer ---------- */
+  footer{
+    border-top: 1px solid var(--line-soft);
+    padding-block: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+    color: var(--text-faint);
+    font-size: 0.82rem;
+  }
+  .footer-brand{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-dim);
+  }
+  .footer-links{
+    display: flex;
+    gap: 20px;
+  }
+  .footer-links a{ text-decoration: none; }
+  .footer-links a:hover{ color: var(--text); }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ transition: none !important; animation: none !important; }
+  }
+
+  /* ---------- Entrance motion ---------- */
+  @keyframes heroIn{
+    from{ opacity: 0; transform: scale(1.035); }
+    to{ opacity: 1; transform: scale(1); }
+  }
+  .hero-frame video{
+    animation: heroIn 1.15s cubic-bezier(.22,.61,.36,1) both;
+  }
+  @keyframes navIn{
+    from{ opacity: 0; transform: translateY(-14px); }
+    to{ opacity: 1; transform: translateY(0); }
+  }
+  header .nav{ animation: navIn .7s ease both; }
+
+  .chrome-text{
+    background-size: 220% 100%;
+    animation: shimmer 7s linear infinite;
+  }
+  @keyframes shimmer{
+    0%{ background-position: 0% 50%; }
+    100%{ background-position: 220% 50%; }
+  }
+
+  body.reveal-ready [data-reveal]{
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity .7s cubic-bezier(.22,.61,.36,1), transform .7s cubic-bezier(.22,.61,.36,1);
+  }
+  body.reveal-ready [data-reveal].in-view{
+    opacity: 1;
+    transform: none;
+  }
+  .services-grid .service:nth-child(1){ transition-delay: .02s; }
+  .services-grid .service:nth-child(2){ transition-delay: .09s; }
+  .services-grid .service:nth-child(3){ transition-delay: .16s; }
+  .services-grid .service:nth-child(4){ transition-delay: .23s; }
+  .services-grid .service:nth-child(5){ transition-delay: .30s; }
+  .process .step:nth-child(1){ transition-delay: .02s; }
+  .process .step:nth-child(2){ transition-delay: .09s; }
+  .process .step:nth-child(3){ transition-delay: .16s; }
+  .process .step:nth-child(4){ transition-delay: .23s; }
+</style>
+
+<!-- shared gradient defs -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <linearGradient id="chromeStroke" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#55545c" stop-opacity="0"/>
+      <stop offset="35%" stop-color="#f6f6f4" stop-opacity="0.9"/>
+      <stop offset="60%" stop-color="#a4a3ab" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#55545c" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+</svg>
+
+<header>
+  <div class="nav">
+    <div class="brand">
+      <img src="images/logo.png" alt="Launch Line">
+      <span class="chrome-text">LAUNCH&nbsp;LINE</span>
+    </div>
+    <nav class="nav-links">
+      <a href="#servicos">Serviços</a>
+      <a href="#processo">Processo</a>
+      <a href="#sobre">Sobre</a>
+      <a href="#contato">Contato</a>
+    </nav>
+    <a class="btn btn-primary" href="https://wa.me/5531971186432?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20Launch%20Line%20e%20quero%20agendar%20uma%20conversa." target="_blank" rel="noopener">Agendar conversa</a>
+  </div>
+</header>
+
+<div class="hero-frame full-bleed">
+  <video src="images/hero.mp4" poster="images/hero.png" autoplay muted loop playsinline aria-label="Launch Line — Tecnologia, Estratégia, Resultados. IA, Marketing, Automação, Estratégia, Negócios."></video>
+</div>
+
+<main class="wrap">
+
+  <svg class="divider" viewBox="0 0 1080 64" preserveAspectRatio="none">
+    <path d="M0,50 C 300,10 500,58 1080,14" fill="none" stroke="url(#chromeStroke)" stroke-width="1"/>
+  </svg>
+
+  <section id="sobre">
+    <div class="eyebrow" data-reveal>Fundador</div>
+    <div class="about" data-reveal style="margin-top:20px">
+      <div class="about-photo">
+        <img src="images/founder.png" alt="Retrato de Daniel Carlos, fundador da Launch Line">
+        <span class="tag">Daniel Carlos</span>
+      </div>
+      <div class="about-body">
+        <h1>Ideias que viram resultado, não só apresentação.</h1>
+        <p class="role">Fundador da Launch Line</p>
+        <p>A maioria dos negócios ainda opera no manual — atendimento, prospecção, relatórios, processos — enquanto a tecnologia pra automatizar boa parte disso já existe e está acessível. É essa a lacuna que a Launch Line existe pra fechar.</p>
+        <p>Eu ajudo empresas a sair do improviso e construir uma operação mais enxuta, apoiada em inteligência artificial, automação e estratégia aplicada. Sem fórmula genérica: cada projeto começa com um diagnóstico real do negócio antes de qualquer automação entrar em produção.</p>
+        <div class="focus-tags">
+          <span>IA</span>
+          <span>Automação</span>
+          <span>Marketing</span>
+          <span>Estratégia</span>
+          <span>Negócios</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="servicos">
+    <div class="section-head" data-reveal>
+      <div class="eyebrow">O que eu faço</div>
+      <h2>Cinco frentes de trabalho, um único objetivo: resultado mensurável.</h2>
+    </div>
+    <div class="services-grid">
+      <div class="service" data-reveal>
+        <span class="num">01</span>
+        <h3>Inteligência Artificial</h3>
+        <p>Agentes e automações com IA para atendimento, triagem de leads e tarefas repetitivas do dia a dia.</p>
+      </div>
+      <div class="service" data-reveal>
+        <span class="num">02</span>
+        <h3>Automação</h3>
+        <p>Conecto CRM, planilhas, WhatsApp e e-mail num fluxo único, sem retrabalho manual entre ferramentas.</p>
+      </div>
+      <div class="service" data-reveal>
+        <span class="num">03</span>
+        <h3>Marketing</h3>
+        <p>Aquisição e funis orientados a dados, com foco em conversão real — não em métrica de vaidade.</p>
+      </div>
+      <div class="service" data-reveal>
+        <span class="num">04</span>
+        <h3>Estratégia</h3>
+        <p>Diagnóstico do negócio, priorização do que realmente importa e um plano de ação claro.</p>
+      </div>
+      <div class="service" data-reveal>
+        <span class="num">05</span>
+        <h3>Negócios</h3>
+        <p>Estruturação de processos e operação pra crescer sem depender só de contratar mais gente.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="processo">
+    <div class="section-head" data-reveal>
+      <div class="eyebrow">Como funciona</div>
+      <h2>Um processo direto, do diagnóstico ao resultado em produção.</h2>
+    </div>
+    <div class="process">
+      <div class="step" data-reveal>
+        <span class="num chrome-text">01</span>
+        <h3>Diagnóstico</h3>
+        <p>Mapeio a operação atual: onde está o gargalo, o que já funciona e o que trava o crescimento.</p>
+      </div>
+      <div class="step" data-reveal>
+        <span class="num chrome-text">02</span>
+        <h3>Plano</h3>
+        <p>Defino prioridades e desenho a solução — IA, automação, marketing ou estratégia — sob medida.</p>
+      </div>
+      <div class="step" data-reveal>
+        <span class="num chrome-text">03</span>
+        <h3>Implementação</h3>
+        <p>Integro ferramentas, construo as automações e ativo os canais definidos no plano.</p>
+      </div>
+      <div class="step" data-reveal>
+        <span class="num chrome-text">04</span>
+        <h3>Acompanhamento</h3>
+        <p>Acompanho os números e ajusto o que for preciso. Resultado é processo contínuo, não entrega única.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contato">
+    <div class="cta" data-reveal>
+      <div class="eyebrow">Próximo passo</div>
+      <h2>Vamos conversar sobre o seu negócio.</h2>
+      <p>Uma conversa direta de ~20 minutos pra entender onde a Launch Line pode gerar mais resultado pra você.</p>
+      <a class="btn btn-primary" href="https://wa.me/5531971186432?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20Launch%20Line%20e%20quero%20agendar%20uma%20conversa." target="_blank" rel="noopener">Agendar no WhatsApp</a>
+      <a class="btn btn-ghost" href="mailto:danielcarlosn1@gmail.com">Ou enviar um e-mail</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <div class="footer-brand">
+    <img src="images/logo.png" alt="Launch Line" style="width:22px;height:22px;object-fit:contain">
+    <span>Launch Line — Tecnologia • Estratégia • Resultados</span>
+  </div>
+  <div class="footer-links">
+    <a href="mailto:danielcarlosn1@gmail.com">danielcarlosn1@gmail.com</a>
+    <a href="https://wa.me/5531971186432" target="_blank" rel="noopener">WhatsApp</a>
+  </div>
+  <span>© 2026 Launch Line</span>
+</footer>
+
+<script>
+(function(){
+  try{
+    var targets = document.querySelectorAll('[data-reveal]');
+    var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(!('IntersectionObserver' in window) || prefersReduced){
+      targets.forEach(function(el){ el.classList.add('in-view'); });
+      return;
+    }
+    document.body.classList.add('reveal-ready');
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+    targets.forEach(function(el){ io.observe(el); });
+  }catch(e){
+    document.querySelectorAll('[data-reveal]').forEach(function(el){ el.classList.add('in-view'); });
+  }
+})();
+</script>
