@@ -12,7 +12,7 @@
     color-scheme: dark;
     --bg: #0b0b0d;
     --bg-soft: #100f11;
-    --surface: #151417;
+    --surface: #1d1c21;
     --line: #29282d;
     --line-soft: rgba(255,255,255,0.08);
     --text: #eeeeec;
@@ -53,6 +53,16 @@
   }
   .full-bleed{
     margin-inline: calc(-1 * max(20px, env(safe-area-inset-left, 0px))) calc(-1 * max(20px, env(safe-area-inset-right, 0px)));
+  }
+
+  .band{
+    margin-inline: calc(-1 * max(20px, env(safe-area-inset-left, 0px))) calc(-1 * max(20px, env(safe-area-inset-right, 0px)));
+    padding-inline: max(20px, env(safe-area-inset-left, 0px)) max(20px, env(safe-area-inset-right, 0px));
+  }
+  .band-a{ background: var(--bg); }
+  .band-b{
+    background: var(--surface);
+    border-block: 1px solid var(--line-soft);
   }
 
   .eyebrow{
@@ -469,13 +479,15 @@
   <video src="images/hero.mp4" poster="images/hero.png" autoplay muted loop playsinline aria-label="Launch Line — Tecnologia, Estratégia, Resultados. IA, Marketing, Automação, Estratégia, Negócios."></video>
 </div>
 
-<main class="wrap">
+<main>
 
-  <svg class="divider" viewBox="0 0 1080 64" preserveAspectRatio="none">
-    <path d="M0,50 C 300,10 500,58 1080,14" fill="none" stroke="url(#chromeStroke)" stroke-width="1"/>
-  </svg>
+  <div class="wrap">
+    <svg class="divider" viewBox="0 0 1080 64" preserveAspectRatio="none">
+      <path d="M0,50 C 300,10 500,58 1080,14" fill="none" stroke="url(#chromeStroke)" stroke-width="1"/>
+    </svg>
+  </div>
 
-  <section id="sobre">
+  <section id="sobre" class="band band-a"><div class="wrap">
     <div class="section-head" data-reveal>
       <div class="eyebrow">Fundadores</div>
       <h2>Ideias que viram resultado, não só apresentação.</h2>
@@ -513,9 +525,9 @@
       <span>Estratégia</span>
       <span>Negócios</span>
     </div>
-  </section>
+  </div></section>
 
-  <section id="servicos">
+  <section id="servicos" class="band band-b"><div class="wrap">
     <div class="section-head" data-reveal>
       <div class="eyebrow">O que eu faço</div>
       <h2>Cinco frentes de trabalho, um único objetivo: resultado mensurável.</h2>
@@ -547,9 +559,9 @@
         <p>Estruturação de processos e operação pra crescer sem depender só de contratar mais gente.</p>
       </div>
     </div>
-  </section>
+  </div></section>
 
-  <section id="processo">
+  <section id="processo" class="band band-a"><div class="wrap">
     <div class="section-head" data-reveal>
       <div class="eyebrow">Como funciona</div>
       <h2>Um processo direto, do diagnóstico ao resultado em produção.</h2>
@@ -576,9 +588,9 @@
         <p>Acompanho os números e ajusto o que for preciso. Resultado é processo contínuo, não entrega única.</p>
       </div>
     </div>
-  </section>
+  </div></section>
 
-  <section id="contato">
+  <section id="contato" class="band band-b"><div class="wrap">
     <div class="cta" data-reveal>
       <div class="eyebrow">Próximo passo</div>
       <h2>Vamos conversar sobre o seu negócio.</h2>
@@ -586,7 +598,7 @@
       <a class="btn btn-primary" href="https://wa.me/5531971186432?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20Launch%20Line%20e%20quero%20agendar%20uma%20conversa." target="_blank" rel="noopener">Agendar no WhatsApp</a>
       <a class="btn btn-ghost" href="mailto:danielcarlosn1@gmail.com">Ou enviar um e-mail</a>
     </div>
-  </section>
+  </div></section>
 
 </main>
 
