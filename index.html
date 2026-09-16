@@ -1,3 +1,8 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Launch Line</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,12 +26,17 @@
   }
 
   *{ box-sizing: border-box; }
+  html{ overflow-x: hidden; }
   body{
+    margin: 0;
+    overflow-x: hidden;
     background: var(--bg);
     color: var(--text);
     font-family: var(--font-body);
     padding-left: max(20px, env(safe-area-inset-left, 0px));
     padding-right: max(20px, env(safe-area-inset-right, 0px));
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
   }
@@ -423,6 +433,9 @@
   .process .step:nth-child(3){ transition-delay: .16s; }
   .process .step:nth-child(4){ transition-delay: .23s; }
 </style>
+</head>
+<body>
+
 
 <!-- shared gradient defs -->
 <svg width="0" height="0" style="position:absolute">
@@ -613,3 +626,6 @@
   }
 })();
 </script>
+
+</body>
+</html>
