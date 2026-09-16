@@ -172,12 +172,22 @@
     overflow: visible;
   }
 
-  /* ---------- About ---------- */
-  .about{
+  /* ---------- About / Founders ---------- */
+  .founders-intro{
+    color: var(--text-dim);
+    max-width: 70ch;
+    margin-bottom: clamp(32px, 5vw, 56px);
+  }
+  .founder-row{
     display: grid;
-    grid-template-columns: 260px 1fr;
-    gap: clamp(28px, 5vw, 64px);
+    grid-template-columns: 230px 1fr;
+    gap: clamp(24px, 4vw, 48px);
     align-items: start;
+  }
+  .founder-row + .founder-row{
+    margin-top: clamp(32px, 5vw, 48px);
+    padding-top: clamp(32px, 5vw, 48px);
+    border-top: 1px solid var(--line-soft);
   }
   .about-photo{
     position: relative;
@@ -212,6 +222,11 @@
     font-size: clamp(1.7rem, 4vw, 2.6rem);
     line-height: 1.2;
   }
+  .about-body h3{
+    font-family: var(--font-display);
+    font-size: clamp(1.15rem, 2.4vw, 1.5rem);
+    line-height: 1.25;
+  }
   .role{
     color: var(--text-dim);
     font-size: 0.95rem;
@@ -237,8 +252,8 @@
   }
 
   @media (max-width: 680px){
-    .about{ grid-template-columns: 1fr; }
-    .about-photo{ max-width: 260px; }
+    .founder-row{ grid-template-columns: 1fr; }
+    .about-photo{ max-width: 230px; }
   }
 
   /* ---------- Services ---------- */
@@ -448,25 +463,42 @@
   </svg>
 
   <section id="sobre">
-    <div class="eyebrow" data-reveal>Fundador</div>
-    <div class="about" data-reveal style="margin-top:20px">
+    <div class="section-head" data-reveal>
+      <div class="eyebrow">Fundadores</div>
+      <h2>Ideias que viram resultado, não só apresentação.</h2>
+    </div>
+    <p class="founders-intro" data-reveal>A maioria dos negócios ainda opera no manual — atendimento, prospecção, relatórios, processos — enquanto a tecnologia pra automatizar boa parte disso já existe e está acessível. É essa a lacuna que a Launch Line existe pra fechar: uma operação enxuta, apoiada em inteligência artificial, automação e estratégia aplicada, sem fórmula genérica.</p>
+
+    <div class="founder-row" data-reveal>
       <div class="about-photo">
-        <img src="images/founder.png" alt="Retrato de Daniel Carlos, fundador da Launch Line">
-        <span class="tag">Daniel Carlos</span>
+        <img src="images/founder-arthur.png" alt="Retrato de Arthur Leon, fundador da Launch Line">
+        <span class="tag">Arthur Leon</span>
       </div>
       <div class="about-body">
-        <h1>Ideias que viram resultado, não só apresentação.</h1>
-        <p class="role">Fundador da Launch Line</p>
-        <p>A maioria dos negócios ainda opera no manual — atendimento, prospecção, relatórios, processos — enquanto a tecnologia pra automatizar boa parte disso já existe e está acessível. É essa a lacuna que a Launch Line existe pra fechar.</p>
-        <p>Eu ajudo empresas a sair do improviso e construir uma operação mais enxuta, apoiada em inteligência artificial, automação e estratégia aplicada. Sem fórmula genérica: cada projeto começa com um diagnóstico real do negócio antes de qualquer automação entrar em produção.</p>
-        <div class="focus-tags">
-          <span>IA</span>
-          <span>Automação</span>
-          <span>Marketing</span>
-          <span>Estratégia</span>
-          <span>Negócios</span>
-        </div>
+        <h3>Arthur Leon</h3>
+        <p class="role">Fundador</p>
+        <p>Arthur lidera a visão de produto e a frente técnica da Launch Line — da arquitetura das automações até a implementação dos agentes de IA em produção, sempre a partir de um diagnóstico real do negócio antes de qualquer linha de código.</p>
       </div>
+    </div>
+
+    <div class="founder-row" data-reveal>
+      <div class="about-photo">
+        <img src="images/founder-daniel.png" alt="Retrato de Daniel Rangel, co-fundador da Launch Line">
+        <span class="tag">Daniel Rangel</span>
+      </div>
+      <div class="about-body">
+        <h3>Daniel Rangel</h3>
+        <p class="role">Co-fundador</p>
+        <p>Daniel cuida da estratégia comercial e da relação com clientes, garantindo que cada automação, cada fluxo de marketing e cada decisão esteja conectada a um resultado real de negócio.</p>
+      </div>
+    </div>
+
+    <div class="focus-tags" data-reveal style="margin-top:40px">
+      <span>IA</span>
+      <span>Automação</span>
+      <span>Marketing</span>
+      <span>Estratégia</span>
+      <span>Negócios</span>
     </div>
   </section>
 
