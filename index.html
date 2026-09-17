@@ -476,7 +476,7 @@
 </header>
 
 <div class="hero-frame full-bleed">
-  <video src="images/hero.mp4" poster="images/hero.png" autoplay muted loop playsinline aria-label="Launch Line: Tecnologia, Estratégia, Resultados. IA, Marketing, Automação, Estratégia, Negócios."></video>
+  <video id="heroVideo" src="images/hero.mp4" poster="images/hero.png" autoplay muted loop playsinline webkit-playsinline preload="auto" aria-label="Launch Line: Tecnologia, Estratégia, Resultados. IA, Marketing, Automação, Estratégia, Negócios."></video>
 </div>
 
 <main>
@@ -596,7 +596,7 @@
       <h2>Vamos conversar sobre o seu negócio.</h2>
       <p>Uma conversa direta de ~20 minutos pra entender onde a Launch Line pode gerar mais resultado pra você.</p>
       <a class="btn btn-primary" href="https://wa.me/5531971186432?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20Launch%20Line%20e%20quero%20agendar%20uma%20conversa." target="_blank" rel="noopener">Agendar no WhatsApp</a>
-      <a class="btn btn-ghost" href="mailto:danielcarlosn1@gmail.com">Ou enviar um e-mail</a>
+      <a class="btn btn-ghost" href="mailto:contato@launchline.com">Ou enviar um e-mail</a>
     </div>
   </div></section>
 
@@ -608,7 +608,7 @@
     <span>Launch Line: Tecnologia • Estratégia • Resultados</span>
   </div>
   <div class="footer-links">
-    <a href="mailto:danielcarlosn1@gmail.com">danielcarlosn1@gmail.com</a>
+    <a href="mailto:contato@launchline.com">contato@launchline.com</a>
     <a href="https://wa.me/5531971186432" target="_blank" rel="noopener">WhatsApp</a>
   </div>
   <span>© 2026 Launch Line</span>
@@ -616,6 +616,31 @@
 
 <script>
 (function(){
+  try{
+    var video = document.getElementById('heroVideo');
+    if(video){
+      video.muted = true;
+      video.defaultMuted = true;
+      var tryPlay = function(){
+        var p = video.play();
+        if(p && typeof p.catch === 'function'){ p.catch(function(){ /* will retry on user gesture */ }); }
+      };
+      tryPlay();
+      document.addEventListener('visibilitychange', function(){
+        if(!document.hidden && video.paused){ tryPlay(); }
+      });
+      var resumeOnGesture = function(){
+        if(video.paused){ tryPlay(); }
+        window.removeEventListener('touchstart', resumeOnGesture);
+        window.removeEventListener('click', resumeOnGesture);
+        window.removeEventListener('scroll', resumeOnGesture);
+      };
+      window.addEventListener('touchstart', resumeOnGesture, { passive: true, once: true });
+      window.addEventListener('click', resumeOnGesture, { once: true });
+      window.addEventListener('scroll', resumeOnGesture, { passive: true, once: true });
+    }
+  }catch(e){}
+
   try{
     var targets = document.querySelectorAll('[data-reveal]');
     var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
