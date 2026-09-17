@@ -59,7 +59,7 @@ gh repo clone rang3lz/launch-line-portfolio
 ## Pontos de contato configurados
 
 - **WhatsApp:** +55 31 97118-6432 (botões "Agendar conversa" / "Agendar no WhatsApp")
-- **E-mail:** danielcarlosn1@gmail.com
+- **E-mail:** contato@launchline.com
 
 ## Pendências / próximos passos sugeridos
 
